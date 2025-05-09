@@ -1,13 +1,17 @@
 resource "aws_s3_bucket" "file_storage" {
   bucket = "${var.project_name}-${var.env}-file-storage"
 
-  versioning {
-    enabled = var.enable_versioning
-  }
-
   tags = {
     Name        = "${var.project_name}-${var.env}-file-storage"
     Environment = var.env
+  }
+}
+
+resource "aws_s3_bucket_versioning" "file_storage_versioning" {
+  bucket = aws_s3_bucket.file_storage.id
+
+  versioning_configuration {
+    status = var.enable_versioning ? "Enabled" : "Suspended"
   }
 }
 

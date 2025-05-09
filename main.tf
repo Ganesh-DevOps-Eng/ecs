@@ -106,3 +106,36 @@ module "s3" {
   env              = "dev"
   enable_versioning = true
 }
+
+module "cicd" {
+  source                   = "./modules/cicd"
+  project_name             = var.project_name
+  env                      = var.env
+  github_repo              = var.github_repo
+  github_owner             = var.github_owner
+  github_oauth_token       = var.github_oauth_token
+  branch                   = var.branch
+  buildspec_path           = var.buildspec_path
+  codebuild_role_arn       = var.codebuild_role_arn
+  codedeploy_role_arn      = var.codedeploy_role_arn
+  artifact_bucket          = var.artifact_bucket
+  codedeploy_app_name      = var.codedeploy_app_name
+  codedeploy_group_name    = var.codedeploy_group_name
+  ecs_cluster_name         = var.ecs_cluster_name
+  ecs_service_name         = var.ecs_service_name
+  listener_arn             = var.listener_arn
+  blue_target_group_name   = var.blue_target_group_name
+  green_target_group_name  = var.green_target_group_name
+  codepipeline_role_arn    = var.codepipeline_role_arn
+}
+
+module "bastion" {
+  source          = "./modules/bastion"
+  project_name    = var.project_name
+  env             = var.env
+  ami_id          = var.bastion_ami_id
+  instance_type   = var.bastion_instance_type
+  subnet_id       = module.vpc.public_subnet_ids[0]
+  key_name        = var.bastion_key_name
+  security_group  = module.sg.bastion_sg_id
+}
