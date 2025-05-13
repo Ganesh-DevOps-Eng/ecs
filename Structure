@@ -1,0 +1,51 @@
+infra/
+├── modules/
+│   ├── vpc/
+│   │   ├── vpc.tf           # VPC, Subnets, IGW, NAT Gateway, Route Tables
+│   │   ├── sg.tf            # Security Groups for ALB and ECS
+│   │   ├── variables.tf     # Input variables specific to VPC module
+│   │   └── outputs.tf       # Output values from VPC module
+│   ├── alb/
+│   │   ├── alb.tf          # ALB configuration
+│   │   ├── variables.tf     # Input variables for ALB module
+│   │   └── outputs.tf       # Output values from ALB module
+│   ├── ecs/
+│   │   ├── ecs.tf          # ECS Cluster and Fargate setup
+│   │   ├── variables.tf     # Input variables for ECS module
+│   │   └── outputs.tf       # Output values from ECS module
+│   ├── aurora/
+│   │   ├── aurora.tf          # Aurora DB Cluster setup
+│   │   ├── variables.tf     # Input variables for Aurora module
+│   │   └── outputs.tf       # Output values from Aurora module
+│   ├── s3/
+│   │   ├── bucket_file_storage.tf
+|   |   ├── bucket_frontend.tf
+|   |   ├── policy_frontend.tf    # S3 bucket setup
+│   │   ├── variables.tf     # Input variables for S3 module
+│   │   └── outputs.tf       # Output values from S3 module
+│   ├── acm/
+│   │   ├── acm.tf          # ACM certificate setup
+│   │   ├── variables.tf     # Input variables for ACM module
+│   │   └── outputs.tf       # Output values from ACM module
+│   ├── route53/
+│   │   ├── route53.tf          # Route53 zone and records setup
+│   │   ├── variables.tf     # Input variables for Route53 module
+│   │   └── outputs.tf       # Output values from Route53 module
+│   ├── bastion/
+│   │   ├── bastion.tf          # Bastion host setup
+│   │   ├── variables.tf     # Input variables for Bastion module
+│   │   └── outputs.tf       # Output values from Bastion module
+│   ├── iam/
+│   │   ├── iam.tf          # IAM roles and policies for services
+│   │   ├── variables.tf     # Input variables for IAM module
+│   │   └── outputs.tf       # Output values from IAM module
+│   ├── cicd/
+│   │   ├── codepipeline.tf  # CodePipeline configuration
+│   │   ├── codebuild.tf     # CodeBuild configuration
+│   │   ├── codedeploy.tf    # CodeDeploy configuration
+│   │   ├── variables.tf     # Input variables for CICD module
+│   │   └── outputs.tf       # Output values from CICD module
+├── main.tf                  # Root module calling VPC, ALB, ECS, etc.
+├── variables.tf             # Root-level variables
+├── outputs.tf               # Root-level outputs
+└── terraform.tfvars         # Variable values for the root module
